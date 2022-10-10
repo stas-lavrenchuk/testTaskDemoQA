@@ -27,7 +27,7 @@ public class BaseTest {
     }
 
     @AfterAll
-    void close() {
+    public void close() {
         if (!Config.HOLD_BROWSER_OPEN) {
             driver.close();
         }
