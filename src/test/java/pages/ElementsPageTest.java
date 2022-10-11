@@ -85,5 +85,13 @@ public class ElementsPageTest extends BaseTest {
                 , elementsPage.textInRadioButton());
     }
 
+    @Test
+    public void webTableTest(){
+        basePage.goToURL(ELEMENTS_URL);
+        elementsPage.selectWebTablesTab();
+        elementsPage.getTable();
+        System.out.println(elementsPage.getValueFromCell(3, 3));
+    }
+
 
 }
