@@ -3,6 +3,7 @@ package pages;
 import common.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pages.elements.*;
 
 import static common.Constant.Urls.ELEMENTS_URL;
 import static common.Constant.dataForTextBox.*;
@@ -13,84 +14,87 @@ public class ElementsPageTest extends BaseTest {
 
     @Test
     public void textBoxTest() {
+        TextBoxPage textBoxPage = new TextBoxPage(driver);
         basePage.goToURL(ELEMENTS_URL);
-        elementsPage.selectTextBoxTab();
-        elementsPage.fillInFullNameField(FULL_NAME);
-        elementsPage.fillInEmailField(EMAIL);
-        elementsPage.fillCurrentAddressField(CURRENT_ADDRESS);
-        elementsPage.fillInPermanentAddressField(PERMANENT_ADDRESS);
+        textBoxPage.selectTextBoxTab();
+        textBoxPage.fillInFullNameField(FULL_NAME);
+        textBoxPage.fillInEmailField(EMAIL);
+        textBoxPage.fillCurrentAddressField(CURRENT_ADDRESS);
+        textBoxPage.fillInPermanentAddressField(PERMANENT_ADDRESS);
         basePage.scrollPageDown();
-        elementsPage.clickSubmitButton();
-        Assertions.assertEquals(TEXT_FOR_TEST, elementsPage.textFromInfoField());
+        textBoxPage.clickSubmitButton();
+        Assertions.assertEquals(TEXT_FOR_TEST, textBoxPage.textFromInfoField());
     }
 
     @Test
     public void checkBoxTest() throws InterruptedException {
+        CheckBoxPage checkBoxPage = new CheckBoxPage(driver);
         // part 1
-        elementsPage.selectCheckBoxTab();
+        checkBoxPage.selectCheckBoxTab();
         Thread.sleep(1000);
-        elementsPage.clickAtPlusButton();
+        checkBoxPage.clickAtPlusButton();
         Thread.sleep(1000);
         basePage.scrollPageDown();
-        elementsPage.selectExcelFileIcon();
-        elementsPage.selectWordFileIcon();
+        checkBoxPage.selectExcelFileIcon();
+        checkBoxPage.selectWordFileIcon();
         Assertions.assertEquals("You have selected :\ndownloads\nwordFile\nexcelFile"
-                , elementsPage.textFromResultField());
-        elementsPage.selectDownloadsIcon();
+                , checkBoxPage.textFromResultField());
+        checkBoxPage.selectDownloadsIcon();
         // part 2
-        elementsPage.selectGeneralIcon();
-        elementsPage.selectClassifiedIcon();
-        elementsPage.selectPrivateIcon();
-        elementsPage.selectPublicIcon();
+        checkBoxPage.selectGeneralIcon();
+        checkBoxPage.selectClassifiedIcon();
+        checkBoxPage.selectPrivateIcon();
+        checkBoxPage.selectPublicIcon();
         Assertions.assertEquals("You have selected :\noffice\npublic\nprivate\nclassified\ngeneral"
-                , elementsPage.textFromResultField());
-        elementsPage.selectOfficeIcon();
+                , checkBoxPage.textFromResultField());
+        checkBoxPage.selectOfficeIcon();
         // part 3
-        elementsPage.selectVeuIcon();
-        elementsPage.selectAngularIcon();
-        elementsPage.selectReactIcon();
+        checkBoxPage.selectVeuIcon();
+        checkBoxPage.selectAngularIcon();
+        checkBoxPage.selectReactIcon();
         Assertions.assertEquals("You have selected :\nworkspace\nreact\nangular\nveu"
-                , elementsPage.textFromResultField());
-        elementsPage.selectWorkSpaceIcon();
+                , checkBoxPage.textFromResultField());
+        checkBoxPage.selectWorkSpaceIcon();
         // part 4
-        elementsPage.selectDocumentsIcon();
+        checkBoxPage.selectDocumentsIcon();
         Assertions.assertEquals("You have selected :\ndocuments\nworkspace\nreact\nangular\nveu\n" +
                         "office\npublic\nprivate\nclassified\ngeneral"
-                , elementsPage.textFromResultField());
-        elementsPage.selectDocumentsIcon();
+                , checkBoxPage.textFromResultField());
+        checkBoxPage.selectDocumentsIcon();
         // part 5
-        elementsPage.selectCommandsIcon();
-        elementsPage.selectNotesIcon();
+        checkBoxPage.selectCommandsIcon();
+        checkBoxPage.selectNotesIcon();
         Assertions.assertEquals("You have selected :\ndesktop\nnotes\ncommands"
-                , elementsPage.textFromResultField());
-        elementsPage.selectDesktopIcon();
+                , checkBoxPage.textFromResultField());
+        checkBoxPage.selectDesktopIcon();
         // part 6
-        elementsPage.selectHomeIcon();
+        checkBoxPage.selectHomeIcon();
         Assertions.assertEquals("You have selected :\nhome\ndesktop\nnotes\ncommands\n" +
                         "documents\nworkspace\nreact\nangular\nveu\noffice\npublic\nprivate\nclassified\n" +
                         "general\ndownloads\nwordFile\nexcelFile"
-                , elementsPage.textFromResultField());
-        elementsPage.clickAtMinusButton();
+                , checkBoxPage.textFromResultField());
+        checkBoxPage.clickAtMinusButton();
     }
 
     @Test
     public void radioButtonTest(){
-        elementsPage.selectRadioButtonTab();
-        elementsPage.selectYesButton();
+        RadioButtonPage radioButtonPage = new RadioButtonPage(driver);
+        radioButtonPage.selectRadioButtonTab();
+        radioButtonPage.selectYesButton();
         Assertions.assertEquals("You have selected Yes"
-                , elementsPage.textInRadioButton());
+                , radioButtonPage.textInRadioButton());
 
-        elementsPage.selectImpressiveButton();
+        radioButtonPage.selectImpressiveButton();
         Assertions.assertEquals("You have selected Impressive"
-                , elementsPage.textInRadioButton());
+                , radioButtonPage.textInRadioButton());
     }
 
     @Test
     public void webTableTest(){
-        basePage.goToURL(ELEMENTS_URL);
-        elementsPage.selectWebTablesTab();
-        elementsPage.getTable();
-        System.out.println(elementsPage.getValueFromCell(3, 3));
+        WebTablesPage webTablesPage = new WebTablesPage(driver);
+        webTablesPage.selectWebTablesTab();
+        webTablesPage.getTable();
+        System.out.println(webTablesPage.getValueFromCell(3, 3));
     }
 
 
