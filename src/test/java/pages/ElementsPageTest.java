@@ -10,8 +10,6 @@ import static common.Constant.dataForTextBox.*;
 
 public class ElementsPageTest extends BaseTest {
 
-    ElementsPage elementsPage = new ElementsPage(driver);
-
     @Test
     public void textBoxTest() {
         TextBoxPage textBoxPage = new TextBoxPage(driver);
@@ -94,8 +92,17 @@ public class ElementsPageTest extends BaseTest {
         WebTablesPage webTablesPage = new WebTablesPage(driver);
         webTablesPage.selectWebTablesTab();
         webTablesPage.getTable();
-        System.out.println(webTablesPage.getValueFromCell(3, 3));
+        System.out.println(webTablesPage.getValueFromCell("Salary", 3));
     }
 
+    @Test
+    public void buttonsTest() throws InterruptedException {
+        ButtonsPage buttonsPage = new ButtonsPage(driver);
+        basePage.goToURL(ELEMENTS_URL);
+        Thread.sleep(3000);
+        buttonsPage.selectButtonsTab();
+        Thread.sleep(3000);
+        buttonsPage.doubleClick();
+    }
 
 }

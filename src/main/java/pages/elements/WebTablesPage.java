@@ -48,8 +48,8 @@ public class WebTablesPage {
     public List<List<WebElement>> getRowsWithColumns() {
         List<WebElement> rows = getRows();
         List<List<WebElement>> rowsWithColumns = new ArrayList<>();
-        for (WebElement row : rows) {
-            rowsWithColumns.add(row.findElements(cellBy));
+        for (int i = 0; i < getRows().size(); i++) {
+            rowsWithColumns.add(driver.findElements(By.xpath(String.format("(//div[@role='row'])[%d]//div[@role='gridcell']", i+2))));
         }
         return rowsWithColumns;
     }
