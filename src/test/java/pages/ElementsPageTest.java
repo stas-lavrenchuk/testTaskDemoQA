@@ -132,19 +132,45 @@ public class ElementsPageTest extends BaseTest {
         linksPage.selectLinksTab();
 
         linksPage.clickCreatedLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 201 and status text Created",
+                linksPage.response());
         linksPage.clickNoContentLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 204 and status text No Content",
+                linksPage.response());
         linksPage.clickMovedLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 301 and status text Moved Permanently",
+                linksPage.response());
         linksPage.clickBadRequestLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 400 and status text Bad Request",
+                linksPage.response());
         linksPage.clickUnauthorizedLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 401 and status text Unauthorized",
+                linksPage.response());
         linksPage.clickForbiddenLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 403 and status text Forbidden",
+                linksPage.response());
         linksPage.clickNotFoundLink();
+        Thread.sleep(500);
+        Assertions.assertEquals("Link has responded with staus 404 and status text Not Found",
+                linksPage.response());
 
         linksPage.clickHomeLink();
         basePage.goToTheNewTab();
-        Thread.sleep(2000);
+        Assertions.assertEquals("https://demoqa.com/", driver.getCurrentUrl());
         basePage.closeTabAndGoBack();
+        Assertions.assertEquals("https://demoqa.com/links", driver.getCurrentUrl());
 
-
+        linksPage.clickDynamicHomeLink();
+        basePage.goToTheNewTab();
+        Assertions.assertEquals("https://demoqa.com/", driver.getCurrentUrl());
+        basePage.closeTabAndGoBack();
+        Assertions.assertEquals("https://demoqa.com/links", driver.getCurrentUrl());
     }
 
 }
