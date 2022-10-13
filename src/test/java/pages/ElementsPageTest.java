@@ -173,4 +173,14 @@ public class ElementsPageTest extends BaseTest {
         Assertions.assertEquals("https://demoqa.com/links", driver.getCurrentUrl());
     }
 
+    @Test
+    public void brokenLinksAndImagesTest() {
+        basePage.goToURL(ELEMENTS_URL);
+        BrokenLinksPage brokenLinksPage = new BrokenLinksPage(driver);
+        basePage.scrollPageDown();
+        brokenLinksPage.selectBrokenLinks_ImagesTab();
+        brokenLinksPage.findBrokenImages();
+        brokenLinksPage.findBrokenLinks();
+    }
+
 }
