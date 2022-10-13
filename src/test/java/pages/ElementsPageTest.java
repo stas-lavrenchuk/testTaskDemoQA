@@ -3,8 +3,8 @@ package pages;
 import common.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import pages.elements.*;
+
 
 import static common.Constant.Urls.ELEMENTS_URL;
 import static common.Constant.dataForTextBox.*;
@@ -122,4 +122,29 @@ public class ElementsPageTest extends BaseTest {
         buttonsPage.click();
         Assertions.assertEquals("You have done a dynamic click", buttonsPage.textFromClick());
     }
+
+    @Test
+    public void linksTest() throws InterruptedException {
+
+        basePage.goToURL(ELEMENTS_URL);
+        LinksPage linksPage = new LinksPage(driver);
+        basePage.scrollPageDown();
+        linksPage.selectLinksTab();
+
+        linksPage.clickCreatedLink();
+        linksPage.clickNoContentLink();
+        linksPage.clickMovedLink();
+        linksPage.clickBadRequestLink();
+        linksPage.clickUnauthorizedLink();
+        linksPage.clickForbiddenLink();
+        linksPage.clickNotFoundLink();
+
+        linksPage.clickHomeLink();
+        basePage.goToTheNewTab();
+        Thread.sleep(2000);
+        basePage.closeTabAndGoBack();
+
+
+    }
+
 }

@@ -17,7 +17,6 @@ public class DemoQAMainPageTest extends BaseTest {
     public void clickAllElements() {
 
         basePage.goToURL(DEMOQA_MAIN_URL);
-        String page1 = driver.getWindowHandle();
         // select Elements and go back
         demoQAMainPage.selectElementsTab();
         Assertions.assertEquals(ELEMENTS_URL, driver.getCurrentUrl());
@@ -45,18 +44,9 @@ public class DemoQAMainPageTest extends BaseTest {
         Assertions.assertEquals(DEMOQA_MAIN_URL, driver.getCurrentUrl());
         // Select Selenium Training, switch to the new open page, and switch back.
         demoQAMainPage.selectSeleniumTrainingTab();
-        Set<String> currentWindows = driver.getWindowHandles();
-        String page2 = null;
-        for (String window : currentWindows) {
-            if (!window.equals(page1)) {
-                page2 = window;
-                break;
-            }
-        }
-        driver.switchTo().window(page2);
+        basePage.goToTheNewTab();
         Assertions.assertEquals(SELENIUM_TRAINING, driver.getCurrentUrl());
-        driver.close();
-        driver.switchTo().window(page1);
+        basePage.closeTabAndGoBack();
         Assertions.assertEquals(DEMOQA_MAIN_URL, driver.getCurrentUrl());
     }
 
