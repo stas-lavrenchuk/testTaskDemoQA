@@ -21,10 +21,31 @@ public class ButtonsPage {
 
     public final By doubleClickButton = By.xpath("//button[@id='doubleClickBtn']");
     public final By rightClickButton = By.xpath("//button[@id='rightClickBtn']");
-    public final By clickButton = By.xpath("//button[@id='Pp5j5']");
+    public final By clickButton = By.xpath("//button[text()='Click Me']");
 
-    public void doubleClick (){
+    public void doubleClick() {
         Actions actions = new Actions(driver);
         actions.doubleClick(driver.findElement(doubleClickButton)).perform();
+    }
+
+    public void rightClick() {
+        Actions actions = new Actions(driver);
+        actions.contextClick(driver.findElement(rightClickButton)).perform();
+    }
+
+    public void click() {
+        driver.findElement(clickButton).click();
+    }
+
+    public String textFromDoubleClick() {
+        return driver.findElement(By.xpath("//p[@id='doubleClickMessage']")).getText();
+    }
+
+    public String textFromRightClick() {
+        return driver.findElement(By.xpath("//p[@id='rightClickMessage']")).getText();
+    }
+
+    public String textFromClick() {
+        return driver.findElement(By.xpath("//p[@id='dynamicClickMessage']")).getText();
     }
 }

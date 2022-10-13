@@ -16,7 +16,7 @@ public class Config {
         /**
          * To keep the browser open after all tests
          */
-        public static final Boolean HOLD_BROWSER_OPEN = false;
+        public static final Boolean HOLD_BROWSER_OPEN = true;
         /**
          * Clear dir reports before starting the build
          */

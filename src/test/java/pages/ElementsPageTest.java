@@ -3,6 +3,7 @@ package pages;
 import common.BaseTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import pages.elements.*;
 
 import static common.Constant.Urls.ELEMENTS_URL;
@@ -12,8 +13,8 @@ public class ElementsPageTest extends BaseTest {
 
     @Test
     public void textBoxTest() {
-        TextBoxPage textBoxPage = new TextBoxPage(driver);
         basePage.goToURL(ELEMENTS_URL);
+        TextBoxPage textBoxPage = new TextBoxPage(driver);
         textBoxPage.selectTextBoxTab();
         textBoxPage.fillInFullNameField(FULL_NAME);
         textBoxPage.fillInEmailField(EMAIL);
@@ -26,6 +27,7 @@ public class ElementsPageTest extends BaseTest {
 
     @Test
     public void checkBoxTest() throws InterruptedException {
+        basePage.goToURL(ELEMENTS_URL);
         CheckBoxPage checkBoxPage = new CheckBoxPage(driver);
         // part 1
         checkBoxPage.selectCheckBoxTab();
@@ -75,7 +77,8 @@ public class ElementsPageTest extends BaseTest {
     }
 
     @Test
-    public void radioButtonTest(){
+    public void radioButtonTest() {
+        basePage.goToURL(ELEMENTS_URL);
         RadioButtonPage radioButtonPage = new RadioButtonPage(driver);
         radioButtonPage.selectRadioButtonTab();
         radioButtonPage.selectYesButton();
@@ -88,21 +91,35 @@ public class ElementsPageTest extends BaseTest {
     }
 
     @Test
-    public void webTableTest(){
+    public void webTableTest() {
+        basePage.goToURL(ELEMENTS_URL);
         WebTablesPage webTablesPage = new WebTablesPage(driver);
         webTablesPage.selectWebTablesTab();
         webTablesPage.getTable();
-        System.out.println(webTablesPage.getValueFromCell("Salary", 3));
+        Assertions.assertEquals("2000", webTablesPage.getValueFromCell("Salary", 3));
+        Assertions.assertEquals("Cantrell", webTablesPage.getValueFromCell("Last Name", 2));
+        webTablesPage.addString("Capitan", "Morgan", "morgan@gmail.com", 35, 3500,
+                "Spirit drinks");
+        webTablesPage.edit(2, "Jonny", "Walker", "walker@gmail.com", 35, 5500,
+                "Spirit drinks");
+        Assertions.assertEquals("walker@gmail.com",
+                webTablesPage.getValueFromCell("Email", 2));
+        webTablesPage.delete(4);
+        Assertions.assertEquals(" ", webTablesPage.getValueFromCell("Last Name", 4));
+        webTablesPage.search("Vega");
+        Assertions.assertEquals("Vega", webTablesPage.getValueFromCell("Last Name", 1));
     }
 
     @Test
-    public void buttonsTest() throws InterruptedException {
-        ButtonsPage buttonsPage = new ButtonsPage(driver);
+    public void buttonsTest() {
         basePage.goToURL(ELEMENTS_URL);
-        Thread.sleep(3000);
+        ButtonsPage buttonsPage = new ButtonsPage(driver);
         buttonsPage.selectButtonsTab();
-        Thread.sleep(3000);
         buttonsPage.doubleClick();
+        Assertions.assertEquals("You have done a double click", buttonsPage.textFromDoubleClick());
+        buttonsPage.rightClick();
+        Assertions.assertEquals("You have done a right click", buttonsPage.textFromRightClick());
+        buttonsPage.click();
+        Assertions.assertEquals("You have done a dynamic click", buttonsPage.textFromClick());
     }
-
 }
