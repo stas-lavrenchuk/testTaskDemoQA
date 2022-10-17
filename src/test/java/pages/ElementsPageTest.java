@@ -1,10 +1,14 @@
 package pages;
 
 import common.BaseTest;
+import common.Constant;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import pages.elements.*;
 
+
+import java.time.Duration;
 
 import static common.Constant.Urls.ELEMENTS_URL;
 import static common.Constant.dataForTextBox.*;
@@ -181,6 +185,37 @@ public class ElementsPageTest extends BaseTest {
         brokenLinksPage.selectBrokenLinks_ImagesTab();
         brokenLinksPage.findBrokenImages();
         brokenLinksPage.findBrokenLinks();
+    }
+
+    @Test
+    public void uploadAndDownloadTest() {
+        basePage.goToURL(ELEMENTS_URL);
+        UploadAndDownloadPage uploadAndDownloadPage = new UploadAndDownloadPage(driver);
+        basePage.scrollPageDown();
+        uploadAndDownloadPage.selectUploadAndDownloadTab();
+
+        uploadAndDownloadPage.uploadFile("D:\\UC-5c2a2199-0328-4d05-910e-7cb69cc70c72.jpg");
+        Assertions.assertEquals("C:\\fakepath\\UC-5c2a2199-0328-4d05-910e-7cb69cc70c72.jpg",
+                uploadAndDownloadPage.getUploadFilePath());
+
+        uploadAndDownloadPage.downloadFile();
+    }
+
+    @Test
+    public void dynamicTest() throws InterruptedException {
+        basePage.goToURL(ELEMENTS_URL);
+        DynamicPropertiesPage dPP = new DynamicPropertiesPage(driver);
+        basePage.scrollPageDown();
+        dPP.selectDynamicPropertiesTab();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        Assertions.assertFalse(dPP.isEnableAfterPresent());
+        Assertions.assertEquals("mt-4 btn btn-primary", dPP.getClassFromColorChange());
+        Assertions.assertFalse(dPP.isVisibleAfterPresent());
+        Thread.sleep(5000);
+        Assertions.assertTrue(dPP.isEnableAfterPresent());
+        Assertions.assertEquals("mt-4 text-danger btn btn-primary", dPP.getClassFromColorChange());
+        Assertions.assertTrue(dPP.isVisibleAfterPresent());
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constant.TimeoutVariables.IMPLICIT_WAIT));
     }
 
 }
