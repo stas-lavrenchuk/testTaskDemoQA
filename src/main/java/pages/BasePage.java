@@ -29,6 +29,11 @@ public class BasePage {
         jse.executeScript("scroll(0, -350);");
     }
 
+    public void zoom (int i){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.body.style.zoom = '"+ i+ "%'");
+    }
+
     public void goToTheNewTab() {
         String page1 = driver.getWindowHandle();
         Set<String> currentWindows = driver.getWindowHandles();

@@ -27,4 +27,20 @@ public class Constant {
 
     }
 
+    public static class dataForPracticeForm{
+        public static final String FIRST_NAME = "Stan";
+        public static final String LAST_NAME = "Marsh";
+        public static final String EMAIL = "name@example.com";
+        public static final String GENDER = "Male";
+        public static final String MOBILE = "1234567890";
+        public static final String SUBJECT = "Maths";
+        public static final String YEAR_OF_BIRTH = "2004";
+        public static final String MONTH_OF_BIRTH = "November";
+        public static final String DAY_OF_BIRTH = "19";
+        public static final String HOBBIES = "Sports";
+        public static final String STATE = "Haryana";
+        public static final String CITY = "Panipat";
+        public static final String CURRENT_ADDRESS = "Current Address";
+    }
+
 }
